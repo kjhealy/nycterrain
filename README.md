@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/kjhealy/nycterrain/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kjhealy/nycterrain/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Bare-earth digital elevation model for New York City, derived from the
@@ -87,7 +88,7 @@ nyc_terrain_contours_sf
 ``` r
 ggplot(nyc_terrain_contours_sf) +
   geom_sf(aes(color = elev_ft), linewidth = 0.15) +
-  scale_color_viridis_c(option = "G", direction = -1) +
+  scale_color_viridis_c(option = "inferno", direction = -1) +
   labs(color = "Elevation (ft)") +
   theme_void()
 ```
