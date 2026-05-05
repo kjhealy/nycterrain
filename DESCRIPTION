@@ -1,0 +1,26 @@
+Package: nycterrain
+Title: NYC Bare-Earth Terrain Elevation
+Version: 0.0.1.9000
+Authors@R: 
+    person("Kieran", "Healy", , "kjhealy@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "https://orcid.org/0000-0001-9114-981X"))
+Description: Bare-earth digital elevation model for New York City, derived
+    from 2010 LiDAR. Provides 50-foot and 100-foot resolution rasters
+    masked to the NYC borough boundaries, plus contour lines suitable for
+    ggplot2 overlays.
+License: MIT + file LICENSE
+URL: https://github.com/kjhealy/nycterrain
+BugReports: https://github.com/kjhealy/nycterrain/issues
+Depends: 
+    R (>= 3.5)
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    terra (>= 1.7.0)
+Suggests: 
+    ggplot2,
+    sf (>= 1.0.0),
+    tibble (>= 3.0.0)

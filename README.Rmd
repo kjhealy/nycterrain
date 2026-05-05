@@ -1,0 +1,100 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# nycterrain <img src="man/figures/nycterrain.png" align="right" width="360">
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Bare-earth digital elevation model for New York City, derived from the
+City's 1-foot 2010 LiDAR data. The package ships mean-aggregated 50-foot
+and 100-foot GeoTIFFs masked to the borough boundaries, plus a small
+contour `sf` object for ggplot2 overlays.
+
+## Installation
+
+You can install nycterrain from GitHub:
+
+``` r
+remotes::install_github("kjhealy/nycterrain")
+```
+
+## Loading
+
+```{r, message=FALSE}
+library(nycterrain)
+library(terra)
+library(sf)
+library(ggplot2)
+```
+
+## What's included
+
+The 100-foot and 50-foot rasters are accessed through functions that
+return a `terra::SpatRaster`:
+
+```{r}
+nyc_terrain_100ft()
+```
+
+Use `nyc_terrain_path()` to get the GeoTIFF path directly, e.g. for
+use with `stars`, GDAL, or `rayshader`:
+
+```{r}
+nyc_terrain_path("50ft")
+```
+
+The contour-line dataset is lazy-loaded:
+
+```{r}
+nyc_terrain_contours_sf
+```
+
+## Examples
+
+### A simple terrain map
+
+```{r terrain-map, fig.width = 7, fig.asp = 1, dev = "png"}
+ggplot(nyc_terrain_contours_sf) +
+  geom_sf(aes(color = elev_ft), linewidth = 0.15) +
+  scale_color_viridis_c(option = "G", direction = -1) +
+  labs(color = "Elevation (ft)") +
+  theme_void()
+```
+
+### Hillshade with terra
+
+```{r hillshade, fig.width = 7, fig.asp = 1, dev = "png"}
+r <- nyc_terrain_100ft()
+slp <- terrain(r, "slope", unit = "radians")
+asp <- terrain(r, "aspect", unit = "radians")
+hs <- shade(slp, asp, angle = 35, direction = 315)
+plot(hs, col = grey(0:100 / 100), legend = FALSE, axes = FALSE, mar = c(0, 0, 0, 0))
+```
+
+## Functions and data
+
+- `nyc_terrain_100ft()` -- 100ft mean-aggregated `SpatRaster`
+- `nyc_terrain_50ft()` -- 50ft mean-aggregated `SpatRaster`
+- `nyc_terrain_path()` -- path to a bundled GeoTIFF
+- `nyc_terrain_contours_sf` -- contour lines for ggplot2 overlays
+
+## Source
+
+City of New York, 1-foot Digital Elevation Model (DEM):
+<https://data.cityofnewyork.us/City-Government/1-foot-Digital-Elevation-Model-DEM-/dpc8-z3jc>.
+Bare-earth, hydro-flattened raster derived from 2010 LiDAR. Vertical
+datum NAVD88, units in feet. CRS EPSG:2263 (NAD83 / New York Long Island,
+ftUS).

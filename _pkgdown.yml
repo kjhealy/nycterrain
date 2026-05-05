@@ -1,0 +1,37 @@
+authors:
+  Kieran Healy:
+    href: http://kieranhealy.org
+
+url: https://kjhealy.github.io/nycterrain/
+template:
+  bootstrap: 5
+  bslib:
+    base_font: {google: "IBM Plex Sans"}
+    heading_font: {google: "IBM Plex Sans"}
+    code_font: {google: "IBM Plex Mono"}
+
+reference:
+  - title: "Elevation rasters"
+    desc: Accessor functions returning `terra::SpatRaster` objects.
+    contents:
+      - nyc_terrain_100ft
+      - nyc_terrain_path
+  - title: "Contour data"
+    desc: Lazy-loaded `sf` contour lines.
+    contents:
+      - nyc_terrain_contours_sf
+
+navbar:
+  right:
+   - icon: fa-github
+     href: https://github.com/kjhealy/nycterrain
+
+figures:
+  dev: grDevices::png
+  dpi: 300
+  dev.args: []
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1.618

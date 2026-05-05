@@ -1,0 +1,7 @@
+^LICENSE\.md$
+^\.here$
+^data-raw$
+^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
