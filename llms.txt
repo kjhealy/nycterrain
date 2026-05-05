@@ -89,7 +89,7 @@ nyc_terrain_contours_sf
 
 ggplot(nyc_terrain_contours_sf) +
   geom_sf(aes(color = elev_ft), linewidth = 0.15) +
-  scale_color_viridis_c(option = "G", direction = -1) +
+  scale_color_viridis_c(option = "inferno", direction = -1) +
   labs(color = "Elevation (ft)") +
   theme_void()
 ```
